@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录界面</title>
+<link href="resource/css/Login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body background="./resource/images/wood_pattern.jpg" />
+	<section class="main">
+            <form action="LoginServlet" method="post" class="form-2">
+		    <h1>
+		    	<span class="log-in">LOG IN</span>
+		        "or"
+		        <span class="sign-up">SIGN UP</span>
+		    </h1>
+			<p class="float">
+				<label for="loign">
+			    <i class="icon-user"></i>
+			    "USERNAME"
+			    </label>
+			    <input type="text" name="userEmail" placeholder="Username or email" />
+			</p>
+			<p class="float">
+				<label for="password">
+				    <i class="icon-lock"></i>
+				    "PASSWORD"
+			    </label>
+			    <input type="password" name="userPwd" placeholder="Psaaword" class="showpassword" />
+			</p>
+			<p  class="both">
+			    <input type="submit" name="login" value="log in" />
+			    <input type="button" name="logup" value="sign up"/>
+			</p>
+	    </form>
+    </section>
+</body>
+</html>
