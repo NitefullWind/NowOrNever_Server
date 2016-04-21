@@ -19,6 +19,10 @@ public class User{
     private int planNum = -1;
     private int newNum = -1;
     private int finishedNum = -1;
+    private int learnedNum = 0;
+    private int totalNum = 1;
+    private int learnIndex = 0;
+    private String tableName = "table_words";
     private DBOp db;
     public String errorMessage;
 
@@ -31,12 +35,16 @@ public class User{
         List list = db.execSelect(sql, new String[]{userEmail, userPwd});
         if(list!=null && list.size()==1) {
             list = (List)list.get(0);
-            id = Integer.parseInt(list.get(0).toString());
+            setId(Integer.parseInt(list.get(0).toString()));
             email = list.get(1).toString();
             userName = list.get(2).toString();
             planNum = Integer.parseInt(list.get(5).toString());
             newNum = Integer.parseInt(list.get(6).toString());
             finishedNum = Integer.parseInt(list.get(7).toString());
+            learnedNum = Integer.parseInt(list.get(8).toString());
+            totalNum = Integer.parseInt(list.get(9).toString());
+            learnIndex = Integer.parseInt(list.get(10).toString());
+            tableName = list.get(11).toString();
             return true;
         }
         errorMessage = db.errorMessage;
@@ -50,6 +58,17 @@ public class User{
             return true;
         }
         errorMessage = db.errorMessage;
+        return false;
+    }
+    
+    public boolean setLearnInfo(String uidString, String planNumString, String newNumString , String finishedNumString, 
+            String learnNumString, String totalNumString, String learnIndexString, String tableNameString) {
+        String sql = "update tbl_learninfo set planNum=?,newNum=?,finishedNum=?,learnedNum=?,totalNum=?,learnIndex=?, tableName=? where id = ?";
+        int count = db.execUpdate(sql, new String[]{planNumString, newNumString, finishedNumString, learnNumString, totalNumString, learnIndexString, tableNameString, uidString});
+        if(count == 1) {
+            return true;
+        }
+        errorMessage = "更新学习信息失败";
         return false;
     }
 
@@ -67,5 +86,45 @@ public class User{
 
     public int getFinishedNum() {
         return finishedNum;
+    }
+
+    public int getLearnedNum() {
+        return learnedNum;
+    }
+
+    public void setLearnedNum(int learnedNum) {
+        this.learnedNum = learnedNum;
+    }
+
+    public int getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    public int getLearnIndex() {
+        return learnIndex;
+    }
+
+    public void setLearnIndex(int learnIndex) {
+        this.learnIndex = learnIndex;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }

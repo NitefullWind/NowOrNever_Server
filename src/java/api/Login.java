@@ -41,10 +41,15 @@ public class Login extends HttpServlet {
         MyJSON jo = new MyJSON();
         jo.put("isOk", isLoginOk);
         if(isLoginOk) {
+            jo.put("id", user.getId());
             jo.put("name", user.getUserName());
             jo.put("plan", user.getPlanNum());
             jo.put("new", user.getNewNum());
             jo.put("finished", user.getFinishedNum());
+            jo.put("learned", user.getLearnedNum());
+            jo.put("total", user.getTotalNum());
+            jo.put("learnIndex", user.getLearnIndex());
+            jo.put("tableName", user.getTableName());
         }else{
             jo.put("info", user.errorMessage);
         }
